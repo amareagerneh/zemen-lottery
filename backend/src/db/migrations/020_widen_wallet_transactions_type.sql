@@ -1,0 +1,11 @@
+-- Bug fix: migration 015 widened the CHECK constraint on
+-- wallet_transactions.type to allow 'REFERRAL_BONUS', but the column
+-- itself was left at VARCHAR(12) — 'REFERRAL_BONUS' is 14 characters, so
+-- every referral-reward credit failed with
+-- "value too long for type character varying(12)" before the CHECK
+-- constraint was ever evaluated.
+--
+-- Widened to VARCHAR(20), comfortably longer than any current or
+-- reasonably-foreseeable type value, so this class of bug can't recur
+-- just by adding a new type name to the CHECK constraint later.
+ALTER TABLE wallet_transactions ALTER COLUMN type TYPE VARCHAR(20);

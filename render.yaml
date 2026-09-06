@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: zemen-lottery-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: PGHOST
+        sync: false
+      - key: PGPORT
+        value: "5432"
+      - key: PGUSER
+        sync: false
+      - key: PGPASSWORD
+        sync: false
+      - key: PGDATABASE
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: CBE_ACCOUNT_NAME
+        sync: false
+      - key: CBE_ACCOUNT_NUMBER
+        sync: false
+      - key: TELEBIRR_ACCOUNT_NAME
+        sync: false
+      - key: TELEBIRR_PHONE_NUMBER
+        sync: false
+      - key: WITHDRAWAL_FEE_PERCENT
+        value: "10"
+      - key: MIN_WITHDRAWAL_AMOUNT
+        value: "100"

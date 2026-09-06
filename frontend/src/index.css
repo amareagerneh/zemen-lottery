@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* The signature element: a raffle-ticket stub with a perforated tear line
+     and serrated left/right edges, built with layered radial gradients
+     rather than an SVG so it stays crisp at any size. */
+  .ticket-stub {
+    position: relative;
+    background-color: theme("colors.paper");
+    color: theme("colors.ink");
+    border-radius: 4px;
+    background-image:
+      radial-gradient(circle 6px at 0 50%, theme("colors.ink") 6px, transparent 6.5px),
+      radial-gradient(circle 6px at 100% 50%, theme("colors.ink") 6px, transparent 6.5px);
+    background-repeat: no-repeat;
+    background-position: left center, right center;
+  }
+
+  .ticket-tear {
+    border-top: 2px dashed theme("colors.paperShadow");
+  }
+
+  .ticket-stamp {
+    @apply font-display text-xs tracking-widest px-3 py-1 rounded-sm rotate-6 inline-block;
+  }
+}
